@@ -11,32 +11,46 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("Hello, World!");
-});
-
-app.get("/users", async (req, res) => {
+app.get("/", async (req, res) => {
   try {
-    const { data, error } = await supabase.from("users").select("*");
+    const { data, error } = await supabase.from("Facts").select("*");
     if (error) {
-      throw error;
+      return res.status(400).json({ error: error.message });
     }
-    res.json(data);
+
+    const randomIndex = Math.floor(Math.random() * data.length);
+    const randomFact = data[randomIndex];
+    return res.status(200).json(randomFact);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    return res.status(400).json({ error: error.message });
   }
 });
 
-app.post("/users", async (req, res) => {
+app.get("/:animalType", async (req, res) => {
   try {
-    const { body } = req;
-    const { data, error } = await supabase.from("users").insert(body);
+    const { animalType } = req.params;
+
+    const { data, error } = await supabase
+      .from("Facts")
+      .select("*")
+      .eq("animal_name", animalType);
+
     if (error) {
       throw error;
     }
-    res.status(201).json(data);
+
+    if (!data || data.length === 0) {
+      return res
+        .status(404)
+        .json({ error: `No facts found for ${animalType}` });
+    }
+
+    const randomIndex = Math.floor(Math.random() * data.length);
+    const randomFact = data[randomIndex];
+
+    res.status(200).json(randomFact);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    res.status(400).json({ error: error.message });
   }
 });
 
