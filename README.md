@@ -4,12 +4,12 @@ An API to get quick animal facts. By default the facts are for random animals bu
 
 Built with Express.js and Supabase. 
 
-[animal-facts-api.vercel.app](animal-facts-api.vercel.app)
+[animal-facts-api.vercel.app](https://animal-facts-api.vercel.app)
 
-[Dog Facts](animal-facts-api.vercel.app/Dog)
+[Dog Facts](https://animal-facts-api.vercel.app/Dog)
 
-[Cat Facts](animal-facts-api.vercel.app/Cat)
+[Cat Facts](https://animal-facts-api.vercel.app/Cat)
 
-[Mouse Facts](animal-facts-api.vercel.app/Mouse)
+[Mouse Facts](https://animal-facts-api.vercel.app/Mouse)
 
-[Snake Facts](animal-facts-api.vercel.app/Snake)
+[Snake Facts](https://animal-facts-api.vercel.app/Snake)
